@@ -7,19 +7,13 @@ Rails.application.routes.draw do
 
   get 'questions/destroy'
 
-  # get 'users/index'
-
-  # get 'users/show'
-
-  # get 'users/new'
-
-  # get 'users/create'
-
-  # get 'users/update'
-
-  # get 'users/destroy'
-
   root to: "toppages#index"
-  resources :users, only:[:index, :show, :new, :create]
+  resources :users, only:[:index, :show, :new, :create] do
+    member do
+      get :questions
+      get :answers
+    end
+  end
+  
   resources :questions, only:[:show, :new, :create, :destroy]
 end
