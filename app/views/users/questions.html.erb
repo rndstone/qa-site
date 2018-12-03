@@ -1,0 +1,46 @@
+<style>
+  .content{
+    list-style-type:none;
+  }
+  .questions{
+    list-style-type:none;
+  }
+  .questions p{
+    display: inline;
+    margin:80px;
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li><%= link_to '質問一覧', questions_user_path%></li>
+        <li><%= link_to '回答一覧', answers_user_path%></li></li>
+        <li><a href="#">ユーザ情報の編集</a></li>
+      </ol>
+      </nav>
+      <table class="table">
+        <thead>
+            <tr>
+                <th>投稿日時</th>
+                <th>質問内容</th>
+                <th>お気に入りされた数</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2018/12/01 23:28:09</td>
+                <td><a href="">ここに質問タイトルが入る</a></td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2018/12/01 23:28:09</td>
+                <td><a href="">ここに質問タイトルが入る</a></td>
+                <td>1</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

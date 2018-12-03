@@ -6,4 +6,6 @@ class User < ApplicationRecord
   
   validates :password, length:{in: 8..128}
   has_secure_password
+  
+  has_many :questions
 end
