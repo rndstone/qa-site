@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :require_user_logged_in, only: [:show, :update, :edit, :destroy]
   def index
   end
 
@@ -13,11 +14,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = 'ユーザー登録に成功しました'
-      redirect_to root
+      redirect_to root_url
     else
-      flash[:danger] = 'ユーザー登録に失敗しました'
+      flash.now[:danger] = 'ユーザー登録に失敗しました'
       render :new
     end
+  end
+  
+  def edit
+    # idはどこからきた？
+    @user = User.find(params[:id])
   end
 
   def update
