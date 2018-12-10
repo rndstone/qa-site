@@ -22,11 +22,18 @@ class UsersController < ApplicationController
   end
   
   def edit
-    # idはどこからきた？
     @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      # 更新に成功したときの処理
+      flash[:success] = '更新に成功しました'
+      redirect_to @user
+    else
+      render :edit
+    end
   end
 
   def destroy
