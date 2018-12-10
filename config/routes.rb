@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
-  get 'questions/new'
+  get 'sessions/new'
 
-  get 'questions/create'
+  get 'sessions/create'
 
-  get 'questions/show'
-
-  get 'questions/destroy'
+  get 'sessions/destroy'
 
   root to: "toppages#index"
-  resources :users, only:[:index, :show, :new, :create] do
+  get 'login', to: "sessions#new"
+  post 'login', to: "sessions#create"
+  delete 'logout', to: "sessions#destroy"
+  
+  resources :users, only:[:index, :show, :new, :create, :edit, :update] do
     member do
       get :questions
       get :answers

@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="breadcrumb">
+        <li><%= link_to '質問一覧', questions_user_path%></li>
+        <li><%= link_to '回答一覧', answers_user_path%></li></li>
+        <li><a href="#">ユーザ情報の編集</a></li>
+      </ul>
+      <div class="media">
+        <a class="pull-left" href="#">
+          <%= link_to image_tag("profile.png", alt: "Rails logo"),
+            '#', class:"pull-left" %>
+        </a>
+        <!--<div class="media-body">-->
+            
+          <!--<form>-->
+          <!--  <div class="form-group">-->
+          <!--    <label for="exampleInputEmail1">表示名</label>-->
+          <!--    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="表示するユーザー名">-->
+          <!--  </div>-->
+          <!--  <div class="form-group">-->
+          <!--    <label for="exampleInputEmail1">Email address</label>-->
+          <!--    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">-->
+          <!--  </div>-->
+          <!--  <div class="form-group">-->
+          <!--    <label for="exampleInputPassword1">Password</label>-->
+          <!--    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
+          <!--  </div>-->
+          <!--  <button type="submit" class="btn btn-primary">変更する</button>-->
+          <!--</form>-->
+        <!--</div> -->
+        <div class="media-body">
+          <%= form_for(@user) do |f|%>
+            <%= f.label :name %>
+            <%= f.text_field :name, class:"form-control" %>
+            
+            <%= f.label :email %>
+            <%= f.email_field :email, class:'form-control' %>
+            
+            <%= f.label :password %>
+            <%= f.password_field :password, class:'form-control' %>
+            
+            <%= f.label :password_confirmation, "Confirmation" %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+            
+            <%= f.submit '変更する', class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
