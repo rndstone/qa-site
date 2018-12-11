@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181210051554) do
+ActiveRecord::Schema.define(version: 20181210063017) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -22,8 +22,11 @@ ActiveRecord::Schema.define(version: 20181210051554) do
     t.string   "content"
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "is_open",     default: true
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_questions_on_category_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
 
@@ -35,5 +38,6 @@ ActiveRecord::Schema.define(version: 20181210051554) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users"
 end
