@@ -44,7 +44,7 @@
         <button type="submit" class="btn btn-default">検索</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">質問する</a></li>
+        <li><%= link_to '質問する', new_question_path, class:'btn' %></li>
       <% if logged_in? %>
         <li><%= link_to current_user.name, user_path(current_user.id), class:'btn' %></li>
         <li><%= link_to 'Logout', logout_path, method: :delete, class:'btn' %></li>
