@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'answers/create'
+
+  get 'answers/edit'
+
+  get 'answers/destroy'
+
   get 'sessions/new'
 
   get 'sessions/create'
