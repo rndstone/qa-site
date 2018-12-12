@@ -13,6 +13,9 @@
         <li class="list-item list-inline-item"><button type="button" class="btn btn-secondary">アクティブな質問</button></li>
       </ul>
     <ul>
+    	<% @questions.each do |question| %>
+    		<li class="list-item"><%= link_to question.title, question_path(question.id) %></li>
+    	<% end %>
 						<li class="list-item">
 							質問タイトル
 						</li>
