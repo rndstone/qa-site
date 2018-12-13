@@ -30,13 +30,21 @@
         </div>
 
       </div>
-      <div class="post-ansewer">
-      	<div class="form-group">
-			    <label for="exampleFormControlTextarea1">（ログイン中の場合回答フォーム表示）</label>
-			    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-			    <button type="submit" class="btn btn-primary mb-2">回答する</button>
-			  </div>
-      </div>
+      <% if logged_in? %>
+      	<% if current_user.id != @question.user_id%>
+		      <div class="post-ansewer">
+		      	<div class="form-group">
+					    <%= form_for(@answer)  do |f|%>
+					    	<%= f.text_area :content, :rows => "10", class: 'form-control' %>
+					    	<%= f.hidden_field :question_id, :value => @question.id %>
+					    	<%= f.submit '回答する', class: "btn btn-primary mb-2" %>
+					    <% end %>
+				  	</div>
+	      	</div>
+      	<% end %>
+      	<% else %>
+      		<%= link_to 'ログインして回答する', login_path, class: "btn btn-primary mb-2" %>
+      <% end %>
       <div class="answer">
           <h2>回答〇件</h2>
         <hr>

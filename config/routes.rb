@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'answers/create'
-
-  get 'answers/edit'
-
-  get 'answers/destroy'
-
   get 'sessions/new'
 
   get 'sessions/create'
@@ -24,4 +18,5 @@ Rails.application.routes.draw do
   end
   
   resources :questions, only:[:show, :new, :create, :destroy]
+  resources :answers, only:[:create, :edit, :destroy]
 end

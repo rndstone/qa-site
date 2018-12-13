@@ -23,6 +23,10 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    # ログインしていて、質問投稿ユーザーでない場合はanswer用意
+    if logged_in? && @question.user_id != current_user.id
+      @answer = current_user.answers.build
+    end
   end
 
   def destroy
