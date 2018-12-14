@@ -15,7 +15,7 @@
     <div class="col-md-9">
       <div class="question">
         <div class="page-header">
-          <h1>質問のタイトル</h1>
+          <h1><%= @question.title %></h1>
         </div>
         <div class="pull-left">
         	<button type="button" class="btn btn-info">Good 
@@ -24,42 +24,46 @@
         </div>
         
         <div class="content">
-        <p>
-          質問の内容がここにくる
-        </p>
-        <p>-------------------------------------------------------------</p>
-        <p>-------------------------------------------------------------</p>
-        <p>--------------------------------------------------------------------------------</p>
+					<p><%= @question.content %></p>
         <button type="button" class="btn btn-secondary"><a href="#">tag名</a></button>
         <button type="button" class="btn btn-secondary"><a href="#">tag名2</a></button>
         </div>
-
       </div>
-      <div class="post-ansewer">
-      	<div class="form-group">
-			    <label for="exampleFormControlTextarea1">（ログイン中の場合回答フォーム表示）</label>
-			    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
-			    <button type="submit" class="btn btn-primary mb-2">回答する</button>
-			  </div>
-      </div>
-      <div class="answer">
-          <h2>回答〇件</h2>
-        <hr>
-        <div class="pull-left">
-        	<button type="button" class="btn btn-info">Good <span class="badge badge-light">0</span></button>
-        </div>
-        <div class="content">
-	        <p>
-	          回答の内容がここにくる
-	        </p>
-	        <p>-------------------------------------------------------------</p>
-	        <p>-------------------------------------------------------------</p>
-	        <p>--------------------------------------------------------------------------------</p>
-        </div>
-        <br>
-        (すでに回答がある場合回答に返信するボタンは表示しない）
-          <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>（質問者がログイン中の時）
-        <hr>
+      
+      <% if logged_in? %>
+      	<% if current_user.id != @question.user_id%>
+		      <div class="post-ansewer">
+		      	<div class="form-group">
+					    <%= form_for(@answer)  do |f|%>
+					    	<%= f.text_area :content, :rows => "10", class: 'form-control' %>
+					    	<%= f.hidden_field :question_id, :value => @question.id %>
+					    	<%= f.submit '回答する', class: "btn btn-primary mb-2" %>
+					    <% end %>
+				  	</div>
+	      	</div>
+      	<% end %>
+      	<% else %>
+      		<%= link_to 'ログインして回答する', login_path, class: "btn btn-primary mb-2" %>
+      <% end %>
+      
+	      <div class="answer">
+	        <h2>回答<%= @question.answers.all.length %>件</h2>
+	        <hr>
+	        <% @question.answers.all.each do |answer| %>
+		        <div class="pull-left">
+		        	<button type="button" class="btn btn-info">Good <span class="badge badge-light">0</span></button>
+		        </div>
+		        <div class="content">
+		        	<p><%= simple_format(answer.content) %></p>
+		        </div>
+		        <br>
+		        <% if current_user.id == @question.user_id %>
+			        <button class="btn btn-primary mb-2">回答に返信する</button>（質問者がログイン中の時）
+			        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>（質問者がログイン中の時）
+	        	<% end %>
+	        <hr>
+        <% end %>
+        
          <div class="response_to_answer">
 	        <p>
 	          回答に対する質問者の返信
@@ -69,19 +73,7 @@
 	        <p>--------------------------------------------------------------------------------</p>
         </div>
         <hr>
-        <div class="pull-left">
-        	<button type="button" class="btn btn-info">Good <span class="badge badge-light">0</span></button>
-        </div>
-        <div class="content">
-	        <p>2つ目の回答の内容がここにくる</p>
-	        <p>-------------------------------------------------------------</p>
-	        <p>-------------------------------------------------------------</p>
-	        <p>--------------------------------------------------------------------------------</p>
-        </div>
-        <br>
-        
-        <button class="btn btn-primary mb-2">回答に返信する</button>（質問者がログイン中の時）
-        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>（質問者がログイン中の時
+       
       </div>
     </div>
     <div class="col-md-3">

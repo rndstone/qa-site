@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
-  get 'sessions/create'
-
-  get 'sessions/destroy'
-
   root to: "toppages#index"
   get 'login', to: "sessions#new"
   post 'login', to: "sessions#create"
@@ -18,4 +12,5 @@ Rails.application.routes.draw do
   end
   
   resources :questions, only:[:show, :new, :create, :destroy]
+  resources :answers, only:[:create, :edit, :destroy]
 end

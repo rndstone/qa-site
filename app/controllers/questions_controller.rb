@@ -11,11 +11,6 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    # puts params[:question]
-    # binding.require 'pry'; binding.pry
-    # category = Category.find(params[:question][:category])
-    # params[:question][:category] = category
-    # puts category
     @question = current_user.questions.build(question_params)
     if @question.save
       flash[:success] = '質問を投稿しました'
@@ -27,6 +22,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question = Question.find(params[:id])
+    # ログインしていて、質問投稿ユーザーでない場合はanswer用意
+    if logged_in? && @question.user_id != current_user.id
+      @answer = current_user.answers.build
+    end
   end
 
   def destroy

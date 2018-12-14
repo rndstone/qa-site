@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show, :update, :edit, :destroy]
+  before_action :correct_user, only: [:show, :update, :edit, :destroy]
   def index
   end
 
@@ -41,5 +42,11 @@ class UsersController < ApplicationController
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+  
+  def correct_user
+    if current_user.id != params[:id].to_i
+      redirect_to root_url
+    end
   end
 end

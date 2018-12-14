@@ -4,4 +4,5 @@ class Question < ApplicationRecord
   validates :is_open, presence: true
   belongs_to :user
   belongs_to :category
+  has_many :answers
 end
