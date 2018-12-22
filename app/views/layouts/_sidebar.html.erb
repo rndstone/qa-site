@@ -1,0 +1,30 @@
+ <h2>人気の質問</h2>
+        <ol>
+							<% @question.retrieve_top_question.each do |like| %>
+								<li class="list-item">
+										<%= link_to Question.find(like["question_id"]).title, question_path(like["question_id"]) %>
+								</li>
+								<% end %>
+			  </ol>
+					
+					<h2>タグから探す</h2>
+					<ul class="list-inline">
+						<li class="list-item list-inline-item">
+							タグ名
+						</li>
+						<li class="ist-item list-inline-item">
+							タグ名
+						</li>
+						<li class="list-item list-inline-item">
+							タグ名
+						</li>
+						<li class="list-item list-inline-item">
+							タグ名
+						</li>
+						<li class="list-item list-inline-item">
+							タグ名
+						</li>
+						<li class="list-item list-inline-item">
+							タグ名
+						</li>
+					</ul>
