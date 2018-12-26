@@ -55,7 +55,5 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   require 'capybara/rspec'
-  
-  # config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :controller
+  # require 'helpers/login_helper'
 end

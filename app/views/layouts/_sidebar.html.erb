@@ -1,6 +1,6 @@
  <h2>人気の質問</h2>
         <ol>
-							<% @question.retrieve_top_question.each do |like| %>
+							<% model.retrieve_top_question.each do |like| %>
 								<li class="list-item">
 										<%= link_to Question.find(like["question_id"]).title, question_path(like["question_id"]) %>
 								</li>

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181212113731) do
+ActiveRecord::Schema.define(version: 20181221102920) do
+
+  create_table "answer_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_likes_on_answer_id", using: :btree
+    t.index ["user_id", "answer_id"], name: "index_answer_likes_on_user_id_and_answer_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_answer_likes_on_user_id", using: :btree
+  end
 
   create_table "answers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -27,6 +37,16 @@ ActiveRecord::Schema.define(version: 20181212113731) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_question_likes_on_question_id", using: :btree
+    t.index ["user_id", "question_id"], name: "index_question_likes_on_user_id_and_question_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_question_likes_on_user_id", using: :btree
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -49,8 +69,12 @@ ActiveRecord::Schema.define(version: 20181212113731) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "answer_likes", "answers"
+  add_foreign_key "answer_likes", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "question_likes", "questions"
+  add_foreign_key "question_likes", "users"
   add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users"
 end

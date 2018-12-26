@@ -13,7 +13,7 @@
 					<%= link_to '回答受付中', recent_path, class:'btn btn-primary' %>
 					<%= link_to 'アクティブな質問', recent_path, class:'btn btn-primary' %>
 				</div>
-    	<% @questions.each do |question| %>
+    	<% @recent_questions.each do |question| %>
     		<li class="list-item"><%= link_to question.title, question_path(question.id) %></li>
     	<% end %>
 					<h2>カテゴリーから探す</h2>
@@ -39,7 +39,7 @@
 					</ul>
     </div>
     <div class="col-md-3">
-      <%= render 'layouts/sidebar', model:@questions.find(1) %>
+      <%= render 'layouts/sidebar', model:@recent_questions.find(1) %>
 		</div>
   </div>
 </div>

@@ -13,13 +13,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li><%= link_to '質問一覧', questions_user_path%></li>
-        <li><%= link_to '回答一覧', answers_user_path%></li></li>
-        <li><%= link_to  'ユーザ情報の編集', edit_user_path %></li>
-      </ol>
-      </nav>
+      <%= render 'layouts/user_navbar' %>
       <table class="table">
         <thead>
             <tr>
@@ -30,18 +24,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>2018/12/01 23:28:09</td>
-                <td><a href="">ここに質問タイトルが入る</a></td>
-                <td>1</td>
-                <td>2件</td>
-            </tr>
-            <tr>
-                <td>2018/12/01 23:28:09</td>
-                <td><a href="">ここに質問タイトルが入る</a></td>
-                <td>1</td>
-                <td>0件</td>
-            </tr>
+            <% @questions.each do |question| %>
+              <tr>
+                <td><%= question.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></td>
+                <td><%= link_to question.title, question_path(question.id) %></td>
+                <td><%= question.question_likes.count %></td>
+                <td><%= question.answers.count %></td>
+              </tr>
+            <% end %>
         </tbody>
       </table>
     </div>

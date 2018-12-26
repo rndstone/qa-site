@@ -1,36 +1,37 @@
+<style>
+  .content{
+    list-style-type:none;
+  }
+  .questions{
+    list-style-type:none;
+  }
+  .questions p{
+    display: inline;
+    margin:80px;
+  }
+</style>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <ul class="breadcrumb">
-        <li><%= link_to '質問一覧', questions_user_path%></li>
-        <li><%= link_to '回答一覧', answers_user_path%></li></li>
-        <li class="active">ユーザ情報の編集</li>
-      </ul>
-        <table class="table">
+      <%= render 'layouts/user_navbar' %>
+      <table class="table">
         <thead>
             <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+                <th>回答日時</th>
+                <th>回答内容</th>
+                <th>お気に入りされた数</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>1</th>
-                <td>Hanako</td>
-                <td>Qiita</td>
-                <td>@Hanaq</td>
-            </tr>
-            <tr>
-                <th>2</th>
-                <td>Taro</td>
-                <td>Qiita</td>
-                <td>@TaroQ</td>
-            </tr>
+            <% @answers.each do |answer| %>
+              <tr>
+                <td><%= answer.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></td>
+                <td><%= link_to answer.content, question_path(answer.question.id) %></td>
+                <td>これから</td>
+              </tr>
+            <% end %>
         </tbody>
-        </table>
-      </div>
+      </table>
     </div>
   </div>
 </div>

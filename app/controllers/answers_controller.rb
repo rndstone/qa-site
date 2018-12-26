@@ -26,4 +26,10 @@ class AnswersController < ApplicationController
   def answer_params
     params.require(:answer).permit(:content, :question_id)
   end
+  
+  def questioner_cannot_answer
+    if current_user.id == @question.user_id
+      redirect_to root_url
+    end
+  end
 end
