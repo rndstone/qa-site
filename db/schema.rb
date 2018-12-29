@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181221102920) do
+ActiveRecord::Schema.define(version: 20181227140423) do
 
   create_table "answer_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(version: 20181221102920) do
     t.index ["user_id"], name: "index_question_likes_on_user_id", using: :btree
   end
 
+  create_table "questioner_responses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "answer_id"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_questioner_responses_on_answer_id", using: :btree
+  end
+
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
     t.string   "title"
@@ -75,6 +83,7 @@ ActiveRecord::Schema.define(version: 20181221102920) do
   add_foreign_key "answers", "users"
   add_foreign_key "question_likes", "questions"
   add_foreign_key "question_likes", "users"
+  add_foreign_key "questioner_responses", "answers"
   add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users"
 end

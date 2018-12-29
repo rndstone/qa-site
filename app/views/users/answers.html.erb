@@ -26,8 +26,8 @@
             <% @answers.each do |answer| %>
               <tr>
                 <td><%= answer.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></td>
-                <td><%= link_to answer.content, question_path(answer.question.id) %></td>
-                <td>これから</td>
+                <td><%= link_to answer.content.truncate(30), question_path(answer.question.id) %></td>
+                <td><%= answer.answer_likes.count %></td>
               </tr>
             <% end %>
         </tbody>
