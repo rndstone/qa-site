@@ -40,6 +40,13 @@ class UsersController < ApplicationController
   def destroy
   end
   
+  def questions
+    @questions = current_user.questions
+  end
+  
+  def answers
+    @answers = current_user.answers
+  end
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
