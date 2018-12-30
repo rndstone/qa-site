@@ -63,10 +63,13 @@
 		        	<p><%= simple_format(answer.content) %></p>
 		        </div>
 		        <br>
-		        <% if current_user.id == @question.user_id %>
-			        <button class="btn btn-primary mb-2">回答に返信する</button>（質問者がログイン中の時）
-			        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>（質問者がログイン中の時）
-	        	<% end %>
+		        <% if logged_in? %>
+			        <% if current_user.id == @question.user_id %>
+			        	<%= link_to '回答に返信する', new_questioner_response_path(answer_id: answer.id), class: 'btn btn-primary mb-2' %>
+				        <button class="btn btn-primary mb-2">回答に返信する</button>（質問者がログイン中の時）
+				        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>（質問者がログイン中の時）
+		        	<% end %>
+	        	<% end %> 
 	        <hr>
         <% end %>
         
@@ -79,7 +82,7 @@
 	        <p>--------------------------------------------------------------------------------</p>
         </div>
         <hr>
-       
+        
       </div>
     </div>
     <div class="col-md-3">

@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :require_user_logged_in
-  
+  before_action :questioner_cannot_answer, only:[:create]
   def create
     # binding.pry
     # if current_user.id == @question.user_id
@@ -27,8 +27,10 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:content, :question_id)
   end
   
+  # 質問者と回答者が同じ場合、回答できないように
   def questioner_cannot_answer
-    if current_user.id == @question.user_id
+    question = Question.find(params[:answer][:question_id])
+    if current_user.id == question.user_id
       redirect_to root_url
     end
   end
