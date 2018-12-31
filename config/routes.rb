@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'questioner_responses/new'
+  # get 'questioner_responses/new'
 
-  get 'questioner_responses/create'
+  # get 'questioner_responses/create'
 
-  get 'questioner_responses/edit'
+  # get 'questioner_responses/edit'
 
-  get 'questioner_responses/destroy'
+  # get 'questioner_responses/destroy'
 
   root to: "toppages#index"
   get 'recent', to: "toppages#recent"

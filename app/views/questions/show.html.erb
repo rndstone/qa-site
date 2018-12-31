@@ -65,11 +65,14 @@
 		        <br>
 		        <% if logged_in? %>
 			        <% if current_user.id == @question.user_id %>
-			        	<%= link_to '回答に返信する', new_questioner_response_path(answer_id: answer.id), class: 'btn btn-primary mb-2' %>
+			        	<%= link_to '回答に返信する', questioner_response_path(answer_id: answer.id), class: 'btn btn-primary mb-2' %>
 				        <button class="btn btn-primary mb-2">回答に返信する</button>（質問者がログイン中の時）
 				        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>（質問者がログイン中の時）
 		        	<% end %>
 	        	<% end %> 
+	        	<% if answer.questioner_response %>
+	        		<%= answer.questioner_response.content %>
+	        	<% end %>
 	        <hr>
         <% end %>
         
