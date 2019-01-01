@@ -8,6 +8,7 @@
 }
 .response_to_answer p{
 	font-size: small;
+	margin:10px;
 }
 </style>
 <div class="container">
@@ -71,7 +72,9 @@
 		        	<% end %>
 	        	<% end %> 
 	        	<% if answer.questioner_response %>
-	        		<%= answer.questioner_response.content %>
+	        	  <div class="response_to_answer bg-info">
+	        	  	<%= simple_format("質問者からの返信\n" + answer.questioner_response.content) %>
+	        		</div>
 	        	<% end %>
 	        <hr>
         <% end %>
