@@ -16,7 +16,7 @@ class QuestionerResponsesController < ApplicationController
     @questioner_response = QuestionerResponse.new(questioner_response_params)
     if @questioner_response.save
       flash[:success] = "返信に成功しました。"
-      redirect_to Question.find_by(answer_id: session[:answer_id])
+      redirect_to Answer.find(session[:answer_id]).question
     else
       flash.now[:danger] = "返信に失敗しました。"
       render :new

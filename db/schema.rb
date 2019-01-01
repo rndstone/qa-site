@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20181227140423) do
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answer_id"], name: "index_questioner_responses_on_answer_id", using: :btree
+    t.index ["answer_id"], name: "index_questioner_responses_on_answer_id", unique: true, using: :btree
   end
 
   create_table "questions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
