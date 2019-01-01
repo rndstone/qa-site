@@ -3,5 +3,5 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
   has_many :answer_likes
-  has_one :answer
+  has_one :questioner_response
 end
