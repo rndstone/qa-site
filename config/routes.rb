@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   root to: "toppages#index"
   get 'recent', to: "toppages#recent"
+  get 'active_question', to: "toppages#active_question"
   get 'login', to: "sessions#new"
   post 'login', to: "sessions#create"
   delete 'logout', to: "sessions#destroy"
