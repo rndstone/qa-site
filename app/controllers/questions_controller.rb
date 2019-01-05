@@ -32,6 +32,26 @@ class QuestionsController < ApplicationController
   def destroy
   end
   
+  def put
+    @question = Question.find(params[:id])
+    @question.update("is_open = false")
+    redirect_to @question
+  end
+  
+  def update
+    binding.pry
+    @question = Question.find(params[:id])
+    # @question.update_attributes 
+    @question.is_open = false
+    if @question.save
+      flash[:success] = "質問の回答を締め切りました"
+      redirect_to @question
+    else
+      flash[:danger] = "失敗しました。"
+      redirect_to root_url
+    end
+  end
+  
   private
   
   def question_params
