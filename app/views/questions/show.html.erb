@@ -50,7 +50,7 @@
        <%= link_to '質問を閉じる', question_path(id: @question.id), method: :put, data: {confirm: '本当に回答の受付を終了しますか？'}, class: "btn btn-primary" %>
 			</div>
       <% if logged_in? %>
-      	<% if current_user.id != @question.user_id%>
+      	<% if current_user.id != @question.user_id && @question.is_open == 1 %>
 		      <div class="post-ansewer">
 		      	<div class="form-group">
 					    <%= form_for(@answer) do |f|%>

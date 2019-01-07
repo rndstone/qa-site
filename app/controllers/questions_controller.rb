@@ -39,10 +39,9 @@ class QuestionsController < ApplicationController
   end
   
   def update
-    binding.pry
     @question = Question.find(params[:id])
     # @question.update_attributes 
-    @question.is_open = false
+    @question.is_open = 0
     if @question.save
       flash[:success] = "質問の回答を締め切りました"
       redirect_to @question
