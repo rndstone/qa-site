@@ -8,11 +8,26 @@
 }
 .response_to_answer p{
 	font-size: small;
+	margin:10px;
 }
+
+.close_question {
+	float: right;
+}
+
+.answer {
+	padding-top: 30px;
+}
+
+.ansewer_list{
+	padding-bottom: 50px;
+}
+
 </style>
 <div class="container">
   <div class="row">
     <div class="col-md-9">
+    	
       <div class="question">
         <div class="page-header">
           <h1><%= @question.title %></h1>
@@ -27,13 +42,19 @@
         
         <div class="content">
 					<p><%= @question.content %></p>
-        <button type="button" class="btn btn-secondary"><a href="#">tag名</a></button>
-        <button type="button" class="btn btn-secondary"><a href="#">tag名2</a></button>
+	        <button type="button" class="btn btn-secondary"><a href="#">tag名</a></button>
+	        <button type="button" class="btn btn-secondary"><a href="#">tag名2</a></button>
         </div>
       </div>
-      
       <% if logged_in? %>
-      	<% if current_user.id != @question.user_id%>
+	      <% if current_user.id == @question.user_id && !@question.is_open == 1%>
+					<div class="close_question">
+		       <%= link_to '質問を閉じる', question_path(id: @question.id), method: :put, data: {confirm: '本当に回答の受付を終了しますか？'}, class: "btn btn-primary" %>
+					</div>
+				<% end %>
+			<% end %>
+      <% if logged_in? %>
+      	<% if current_user.id != @question.user_id && @question.is_open == 1 %>
 		      <div class="post-ansewer">
 		      	<div class="form-group">
 					    <%= form_for(@answer) do |f|%>
@@ -51,7 +72,9 @@
 	      <div class="answer">
 	        <h2>回答<%= @question.answers.all.length %>件</h2>
 	        <hr>
+	        
 	        <% @question.answers.all.each do |answer| %>
+	        <div class= "answer_list">
 		        <div class="pull-left">
 		        	<%= form_tag answer_likes_path do %>
 		        		<%= hidden_field_tag :answer_id, answer.id %>
@@ -64,26 +87,20 @@
 		        </div>
 		        <br>
 		        <% if logged_in? %>
-			        <% if current_user.id == @question.user_id && !QuestionerResponse.exists?(answer_id: answer.id) %>
-			        	<%= link_to '回答に返信する', new_questioner_response_path(answer_id: answer.id), class: 'btn btn-primary mb-2' %>
-				        <button class="btn btn-primary mb-2">回答に返信する</button>（質問者がログイン中の時）
-				        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>（質問者がログイン中の時）
+			        <% if current_user.id == @question.user_id %>
+			        	<% if !QuestionerResponse.exists?(answer_id: answer.id) %>
+			        		<%= link_to '回答に返信する', new_questioner_response_path(answer_id: answer.id), class: 'btn btn-primary mb-2' %>
+			        	<% end %>
+				        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>
 		        	<% end %>
 	        	<% end %> 
 	        	<% if answer.questioner_response %>
-	        		<%= answer.questioner_response.content %>
+	        	  <div class="response_to_answer bg-info">
+	        	  	<%= simple_format("質問者からの返信\n" + answer.questioner_response.content) %>
+	        		</div>
 	        	<% end %>
-	        <hr>
+	        	</div>
         <% end %>
-        
-         <div class="response_to_answer">
-	        <p>
-	          回答に対する質問者の返信
-	        </p>
-	        <p>-------------------------------------------------------------</p>
-	        <p>-------------------------------------------------------------</p>
-	        <p>--------------------------------------------------------------------------------</p>
-        </div>
         <hr>
         
       </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181227140423) do
+ActiveRecord::Schema.define(version: 20190105153847) do
 
   create_table "answer_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(version: 20181227140423) do
     t.string   "content"
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "is_open",     default: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "category_id"
+    t.integer  "is_open",     default: 1, null: false
     t.index ["category_id"], name: "index_questions_on_category_id", using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end

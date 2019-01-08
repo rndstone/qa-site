@@ -9,8 +9,8 @@ class AnswersController < ApplicationController
         flash[:success] = '回答を送信しました'
         redirect_to question_path(params[:answer][:question_id])
       else
-        flash.now[:danger] = '回答に失敗しました'
-        render question_path(params[:answer][:question_id])
+        flash[:danger] = '回答に失敗しました'
+        redirect_to question_path(params[:answer][:question_id])
       end
     # end
   end
