@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190105153847) do
+ActiveRecord::Schema.define(version: 20190109114351) do
 
   create_table "answer_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20190105153847) do
     t.integer  "user_id"
     t.integer  "question_id"
     t.string   "content"
-    t.boolean  "is_best_answer", default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "is_best_answer", default: 0, null: false
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
   end
