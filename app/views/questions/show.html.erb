@@ -53,6 +53,7 @@
 					</div>
 				<% end %>
 			<% end %>
+			
       <% if logged_in? %>
       	<% if current_user.id != @question.user_id && @question.is_open == 1 %>
 		      <div class="post-ansewer">
@@ -73,8 +74,11 @@
 	        <h2>回答<%= @question.answers.all.length %>件</h2>
 	        <hr>
 	        
-	        <% @question.answers.all.each do |answer| %>
+	        <% @question.answers.all.order("is_best_answer DESC").each do |answer| %>
 	        <div class= "answer_list">
+	        		<% if answer.is_best_answer == 1 %>
+		        		<h2>ベストアンサー</h2>
+		        	<% end %>
 		        <div class="pull-left">
 		        	<%= form_tag answer_likes_path do %>
 		        		<%= hidden_field_tag :answer_id, answer.id %>
@@ -91,7 +95,9 @@
 			        	<% if !QuestionerResponse.exists?(answer_id: answer.id) %>
 			        		<%= link_to '回答に返信する', new_questioner_response_path(answer_id: answer.id), class: 'btn btn-primary mb-2' %>
 			        	<% end %>
-				        <button class="btn btn-primary mb-2">ベストアンサーに選ぶ</button>
+			        	<% if best_answer_has_already_chosen?(@question.id) %>
+				        	<%= link_to 'ベストアンサーに選ぶ', answer_path(id: answer.id), method: :put, data: {confirm: 'ベストアンサーに選びますか？'}, class: "btn btn-primary" %>
+		        	<% end %>
 		        	<% end %>
 	        	<% end %> 
 	        	<% if answer.questioner_response %>
@@ -99,9 +105,10 @@
 	        	  	<%= simple_format("質問者からの返信\n" + answer.questioner_response.content) %>
 	        		</div>
 	        	<% end %>
+	        	<hr>
 	        	</div>
         <% end %>
-        <hr>
+        
         
       </div>
     </div>

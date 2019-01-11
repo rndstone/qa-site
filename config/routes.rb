@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
   
   resources :questions, only:[:show, :new, :create, :update, :destroy]
-  resources :answers, only:[:create, :edit, :destroy]
+  resources :answers, only:[:create, :edit, :update, :destroy]
   resources :question_likes, only:[:create, :destroy]
   resources :answer_likes, only:[:create, :destroy]
   resources :questioner_responses, only:[:new, :create, :edit, :destroy]

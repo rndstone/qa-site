@@ -14,6 +14,26 @@ class AnswersController < ApplicationController
       end
     # end
   end
+  
+  # def put
+  #   @question = Question.find(params[:id])
+  #   @question.update("is_open = false")
+  #   redirect_to @question
+  # end
+  
+  def update
+    # binding.pry
+    answer = Answer.find(params[:id])
+    # @question.update_attributes 
+    answer.is_best_answer = 1
+    if answer.save
+      flash[:success] = "ベストアンサーに選びました"
+      redirect_to Question.find(answer.question_id)
+    else
+      flash[:danger] = "失敗しました。"
+      redirect_to root_url
+    end
+  end
 
   def edit
   end
