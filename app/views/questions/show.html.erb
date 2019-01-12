@@ -95,9 +95,9 @@
 			        	<% if !QuestionerResponse.exists?(answer_id: answer.id) %>
 			        		<%= link_to '回答に返信する', new_questioner_response_path(answer_id: answer.id), class: 'btn btn-primary mb-2' %>
 			        	<% end %>
-			        	<% if best_answer_has_already_chosen?(@question.id) %>
+			        	<% if !best_answer_has_already_chosen?(@question.id) %>
 				        	<%= link_to 'ベストアンサーに選ぶ', answer_path(id: answer.id), method: :put, data: {confirm: 'ベストアンサーに選びますか？'}, class: "btn btn-primary" %>
-		        	<% end %>
+		        		<% end %>
 		        	<% end %>
 	        	<% end %> 
 	        	<% if answer.questioner_response %>

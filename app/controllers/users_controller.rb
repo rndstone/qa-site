@@ -41,11 +41,11 @@ class UsersController < ApplicationController
   end
   
   def questions
-    @questions = current_user.questions
+    @questions = current_user.questions.page(params[:page]).per(10)
   end
   
   def answers
-    @answers = current_user.answers
+    @answers = current_user.answers.page(params[:page]).per(10)
   end
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

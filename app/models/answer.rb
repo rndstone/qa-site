@@ -17,7 +17,7 @@ class Answer < ApplicationRecord
   
   def best_answer_exsists_only_one
     answers = Answer.where(question_id: self.question_id)
-    if answers.where(is_best_answer: 1)
+    if !answers.where(is_best_answer: 1).empty?
       errors.add(:answer, "すでにベストアンサーを選んでいます。")
     end
   end
