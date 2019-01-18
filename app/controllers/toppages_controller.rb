@@ -11,4 +11,8 @@ class ToppagesController < ApplicationController
   def active_question
     @active_questions = Question.where(is_open: true).limit(10)
   end
+  
+  def categorized_question
+    @categorized_question = Question.where(category_id: params[:category_id]).limit(10)
+  end
 end

@@ -6,14 +6,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9">
-      <h2>（カテゴリ名・タグ名を指定している場合それを表示）</h2>
+      <h2> <%= Category.find(params[:category_id]).name %> の質問</h2>
 
 				<div class="btn-group">
 					<%= link_to '新しい質問', recent_path, class:'btn btn-primary' %>
 					<%= link_to '回答受付中', recent_path, class:'btn btn-primary' %>
 					<%= link_to 'アクティブな質問', active_question_path, class:'btn btn-primary' %>
 				</div>
-    	<% @recent_questions.each do |question| %>
+    	<% @categorized_question.each do |question| %>
     		<li class="list-item"><%= link_to question.title, question_path(question.id) %></li>
     	<% end %>
 					<h2>カテゴリーから探す</h2>
@@ -23,9 +23,10 @@
 								<%= link_to category.name, categorized_question_path(category_id: category.id) %>
 							</li>
 						<% end %>
+					</ul>
     </div>
     <div class="col-md-3">
-      <%= render 'layouts/sidebar', model:@recent_questions[1] %>
+      <%= render 'layouts/sidebar', model:Question.find(1) %>
 		</div>
   </div>
 </div>
