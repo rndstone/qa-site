@@ -2,11 +2,6 @@
   <div class="row">
     <div class="col-md-12">
         <%= render 'layouts/user_navbar' %>
-      <div class="media">
-        <a class="pull-left" href="#">
-          <%= link_to image_tag("profile.png", alt: "Rails logo"),
-            '#', class:"pull-left" %>
-        </a>
         <!--<div class="media-body">-->
             
           <!--<form>-->
@@ -25,8 +20,18 @@
           <!--  <button type="submit" class="btn btn-primary">変更する</button>-->
           <!--</form>-->
         <!--</div> -->
-        <div class="media-body">
+        
           <%= form_for(@user) do |f|%>
+          <div class="media">
+            <div class= "pull-left">
+            <% if @user.image_name != "default.jpg" %>
+              <%= image_tag @user.image_name.url %>
+            <% else %>
+              <%= image_tag "user_image/profile.png" %>
+            <% end %>
+            <%= f.file_field :image_name %>
+            </div>
+            <div class="media-body">
             <%= f.label :name %>
             <%= f.text_field :name, class:"form-control" %>
             

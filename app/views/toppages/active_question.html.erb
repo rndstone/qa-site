@@ -18,25 +18,11 @@
     	<% end %>
 					<h2>カテゴリーから探す</h2>
 					<ul class="list-inline">
-						<li class="list-item list-inline-item">
-							カテゴリー名
-						</li>
-						<li class="list-item list-inline-item">
-							カテゴリー名
-						</li>
-						<li class="list-item list-inline-item">
-							カテゴリー名
-						</li>
-						<li class="list-item list-inline-item">
-							カテゴリー名
-						</li>
-						<li class="list-item list-inline-item">
-							カテゴリー名
-						</li>
-						<li class="list-item list-inline-item">
-							カテゴリー名
-						</li>
-					</ul>
+						<% Category.all.each do |category|%>
+							<li class="list-item list-inline-item">
+								<%= link_to category.name, categorized_question_path(category_id: category.id) %>
+							</li>
+						<% end %>
     </div>
     <div class="col-md-3">
       <%= render 'layouts/sidebar', model:@active_questions[1] %>

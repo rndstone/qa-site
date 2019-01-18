@@ -48,7 +48,7 @@ class UsersController < ApplicationController
     @answers = current_user.answers.page(params[:page]).per(10)
   end
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image_name)
   end
   
   def correct_user
