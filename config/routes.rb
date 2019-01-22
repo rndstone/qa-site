@@ -1,19 +1,14 @@
 Rails.application.routes.draw do
-  # get 'questioner_responses/new'
-
-  # get 'questioner_responses/create'
-
-  # get 'questioner_responses/edit'
-
-  # get 'questioner_responses/destroy'
-
   root to: "toppages#index"
   get 'recent', to: "toppages#recent"
   get 'active_question', to: "toppages#active_question"
   get 'categorized_question', to: "toppages#categorized_question"
+  # get 'search', to: "toppages#search"
+  # get 'search', to: "questions#search"
   get 'login', to: "sessions#new"
   post 'login', to: "sessions#create"
   delete 'logout', to: "sessions#destroy"
+  # get 'questions/search', action: :search, controller: 'questions'
   put 'close', to: "questions#put"
   resources :users, only:[:index, :show, :new, :create, :edit, :update] do
     member do
