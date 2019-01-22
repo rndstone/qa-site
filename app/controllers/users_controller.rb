@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show, :update, :edit, :destroy]
   before_action :correct_user, only: [:show, :update, :edit, :destroy]
+  
   def index
   end
 
   def show
+    @questions = current_user.questions.page(params[:page]).per(10)
   end
 
   def new

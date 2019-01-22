@@ -14,4 +14,11 @@ class Question < ApplicationRecord
                                           ORDER BY COUNT DESC LIMIT 10").to_hash
   end
   
+  def self.search(word)
+    if word
+    where(['title LIKE ? OR content LIKE ?', "%#{word}", "%#{word}"])
+    else
+      all
+    end
+  end
 end

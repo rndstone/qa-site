@@ -20,6 +20,10 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
   
+  def search
+    # binding.pry
+    @found_questions = Question.search(params[:search])
+  end
   private 
   
   def login(email, password)

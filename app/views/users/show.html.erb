@@ -14,30 +14,27 @@
   <div class="row">
     <div class="col-md-12">
       <%= render 'layouts/user_navbar' %>
-      <table class="table">
-        <thead>
-            <tr>
-                <th>投稿日時</th>
-                <th>質問内容</th>
-                <th>お気に入りされた数</th>
-                <th>回答数</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2018/12/01 23:28:09</td>
-                <td><a href="">ここに質問タイトルが入る</a></td>
-                <td>1</td>
-                <td>2件</td>
-            </tr>
-            <tr>
-                <td>2018/12/01 23:28:09</td>
-                <td><a href="">ここに質問タイトルが入る</a></td>
-                <td>1</td>
-                <td>0件</td>
-            </tr>
-        </tbody>
-      </table>
+        <table class="table">
+          <thead>
+              <tr>
+                  <th>投稿日時</th>
+                  <th>質問内容</th>
+                  <th>お気に入りされた数</th>
+                  <th>回答数</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% @questions.each do |question| %>
+                <tr>
+                  <td><%= question.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分") %></td>
+                  <td><%= link_to question.title, question_path(question.id) %></td>
+                  <td><%= question.question_likes.count %></td>
+                  <td><%= question.answers.count %></td>
+                </tr>
+              <% end %>
+          </tbody>
+        </table>
+      <%= paginate @questions %>
     </div>
   </div>
 </div>
