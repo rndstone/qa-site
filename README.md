@@ -3,7 +3,7 @@
 質問サイトです。
 
 # To build(Ubuntu)
-rmagick
+* rmagick
 ```
 sudo apt-get purge graphicsmagick graphicsmagick-dbg imagemagick-common imagemagick imagemagick-6.q16 libmagickcore-6-headers libmagickwand-dev graphicsmagick-libmagick-dev-compat
 sudo apt-get autoremove
