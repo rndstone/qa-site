@@ -74,7 +74,7 @@
 	        <h2>回答<%= @question.answers.all.length %>件</h2>
 	        <hr>
 	        
-	        <% @question.answers.all.order("is_best_answer DESC").each do |answer| %>
+	        <% @question.answers.all.eager_load(:questioner_response).order("is_best_answer DESC").each do |answer| %>
 	        <div class= "answer_list">
 	        		<% if answer.is_best_answer == 1 %>
 		        		<h2>ベストアンサー</h2>
