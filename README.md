@@ -10,6 +10,11 @@ sudo apt-get autoremove
 sudo apt-get install imagemagick libmagickwand-dev
 ```
 
+* mysql
+```
+sudo apt-get install mysql-server
+```
+
 * install gem
 ```
 bundle install
