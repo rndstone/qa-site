@@ -2,6 +2,9 @@
 .list-inline li {
   width: 30%;
 }
+.list-item {
+	list-style: none;
+}
 </style>
 <div class="container">
   <div class="row">
@@ -12,9 +15,9 @@
 					<%= link_to '回答受付中', recent_path, class:'btn btn-primary' %>
 					<%= link_to 'アクティブな質問', active_question_path, class:'btn btn-primary' %>
 				</div>
-    	<% @questions.each do |question| %>
-    		<li class="list-item"><%= link_to question.title, question_path(question.id) %></li>
-    	<% end %>
+		    	<% @questions.each do |question| %>
+		    		<li class="list-item"><%= link_to question.title, question_path(question.id) %></li>
+		    	<% end %>
 					<h2>カテゴリーから探す</h2>
 					<ul class="list-inline">
 						<% Category.all.each do |category|%>
