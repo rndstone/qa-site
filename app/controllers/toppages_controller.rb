@@ -1,7 +1,9 @@
 class ToppagesController < ApplicationController
   def index
     # binding.pry
-    @questions = Question.all
+    # @questions = Question.all
+    @q = Question.ransack(params[:q])
+    @questions = @q.result(distinct: true)
   end
   
   def recent
@@ -15,4 +17,11 @@ class ToppagesController < ApplicationController
   def categorized_question
     @categorized_question = Question.where(category_id: params[:category_id]).limit(10)
   end
+  
+  def search
+    binding.pry
+    @q = Question.ransack(params[:q])
+    @found_questions = @q.result(distinct: true)
+  end
+  
 end

@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+質問サイトです。
 
-Things you may want to cover:
+# To build(Ubuntu)
+* rmagick
+```
+sudo apt-get purge graphicsmagick graphicsmagick-dbg imagemagick-common imagemagick imagemagick-6.q16 libmagickcore-6-headers libmagickwand-dev graphicsmagick-libmagick-dev-compat
+sudo apt-get autoremove
+sudo apt-get install imagemagick libmagickwand-dev
+```
 
-* Ruby version
+* mysql
+```
+sudo apt-get install mysql-server
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* install gem
+```
+bundle install
+```

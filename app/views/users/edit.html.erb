@@ -24,10 +24,11 @@
           <%= form_for(@user) do |f|%>
           <div class="media">
             <div class= "pull-left">
+              
             <% if @user.image_name != "default.jpg" %>
               <%= image_tag @user.image_name.url, :size => "200x200" %>
             <% else %>
-              <%= image_tag "user_image/profile.png" %>
+              <%= image_tag "/images/user_image/default.png" %>
             <% end %>
             <%= f.file_field :image_name %>
             </div>
