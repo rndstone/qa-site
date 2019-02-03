@@ -3,7 +3,7 @@ class ToppagesController < ApplicationController
     # binding.pry
     # @questions = Question.all
     @q = Question.ransack(params[:q])
-    @questions = @q.result(distinct: true)
+    @questions = @q.result(distinct: true).limit(10)
   end
   
   def recent
