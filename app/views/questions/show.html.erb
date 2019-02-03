@@ -16,12 +16,32 @@
 }
 
 .answer {
-	padding-top: 30px;
+	/*padding-top: 30px;*/
+	/*display: block;*/
 }
 
-.ansewer_list{
-	padding-bottom: 50px;
+.ansewer .content{
+	display: inline-block;
 }
+.answer .information{
+	display: inline-block;
+}
+.answer .information .user_image{
+	padding-bottom: 3px;
+}
+
+.question .questioner_info{
+	display: inline-block;
+}
+
+.question .questioner_info .user_image{
+	padding-bottom: 3px;
+}
+
+.question .content{
+	display: inline-block;
+}
+
 
 </style>
 <div class="container">
@@ -32,14 +52,23 @@
         <div class="page-header">
           <h1><%= @question.title %></h1>
         </div>
-        <div class="pull-left">
+         <div class="questioner_info">
+        	<% user = User.find(@question.user_id) %>
+        	投稿者: <%= user.name %>
+        	<br>
+        	<div class="user_image">
+        	  <% if user.image_name_identifier != "default.jpg" %>
+              <%= image_tag user.image_name.url, :size => "100x100" %>
+            <% else %>
+              <%= image_tag "/images/user_image/default.png", :size => "100x100" %>
+            <% end %>
+           </div>
         			<%= form_tag question_likes_path do %>
 		        		<%= hidden_field_tag :question_id, @question.id %>
 		        		<%= submit_tag "Good", class: "btn btn-info" %>
 		        		<span class="badge badge-light"><%= @question.question_likes.count %></span>
 		        	<% end %>
         </div>
-        
         <div class="content">
 					<p><%= @question.content %></p>
 	        <button type="button" class="btn btn-secondary"><a href="#">tag名</a></button>
@@ -70,16 +99,28 @@
       		<%= link_to 'ログインして回答する', login_path, class: "btn btn-primary mb-2" %>
       <% end %>
       
-	      <div class="answer">
-	        <h2>回答<%= @question.answers.all.length %>件</h2>
+
+	        <!--<h2>回答<%= @question.answers.all.length %>件</h2>-->
 	        <hr>
+	        <h2>回答<%= @question.answers.all.length %>件</h2>
 	        
 	        <% @question.answers.all.eager_load(:questioner_response).order("is_best_answer DESC").each do |answer| %>
-	        <div class= "answer_list">
+	        <!--<div class= "answer_list">-->
+	        	 <div class="answer">
 	        		<% if answer.is_best_answer == 1 %>
 		        		<h2>ベストアンサー</h2>
 		        	<% end %>
-		        <div class="pull-left">
+		        <div class="information">
+		        	<% responder = User.find(answer.user_id) %>
+		        	回答者: <%= responder.name %>
+		        	<br>
+		        	<div class="user_image">
+		        <% if responder.image_name_identifier != "default.jpg" %>
+              <%= image_tag responder.image_name.url, :size => "100x100" %>
+            <% else %>
+              <%= image_tag "/uploads/default.jpg", :size => "100x100" %>
+            <% end %>
+            </div>
 		        	<%= form_tag answer_likes_path do %>
 		        		<%= hidden_field_tag :answer_id, answer.id %>
 		        		<%= submit_tag "Good", class: "btn btn-info" %>
@@ -88,7 +129,7 @@
 		        </div>
 		        <div class="content">
 		        	<p><%= simple_format(answer.content) %></p>
-		        </div>
+		        
 		        <br>
 		        <% if logged_in? %>
 			        <% if current_user.id == @question.user_id %>
@@ -105,12 +146,10 @@
 	        	  	<%= simple_format("質問者からの返信\n" + answer.questioner_response.content) %>
 	        		</div>
 	        	<% end %>
-	        	<hr>
+	        	</div>
+	        		<hr>
 	        	</div>
         <% end %>
-        
-        
-      </div>
     </div>
     <div class="col-md-3">
     	<%= render 'layouts/sidebar', model: @question %>

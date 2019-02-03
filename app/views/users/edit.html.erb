@@ -25,7 +25,8 @@
           <div class="media">
             <div class= "pull-left">
               
-            <% if @user.image_name != "default.jpg" %>
+            <% if @user.image_name_identifier != "default.jpg" %>
+
               <%= image_tag @user.image_name.url, :size => "200x200" %>
             <% else %>
               <%= image_tag "/images/user_image/default.png" %>
