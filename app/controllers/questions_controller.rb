@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :require_user_logged_in, only: [:create, :destroy]
+  before_action :require_user_logged_in, only: [:create, :destroy, :update]
   include SessionsHelper
   
   def new
