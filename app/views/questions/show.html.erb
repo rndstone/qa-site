@@ -33,6 +33,7 @@
           <h1><%= @question.title %></h1>
         </div>
         <div class="pull-left">
+        	投稿者: <%= User.find(@question.user_id).name %>
         			<%= form_tag question_likes_path do %>
 		        		<%= hidden_field_tag :question_id, @question.id %>
 		        		<%= submit_tag "Good", class: "btn btn-info" %>
