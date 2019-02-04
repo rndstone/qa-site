@@ -1,3 +1,52 @@
 // Place all the styles related to the questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.list-inline li {
+  width: 30%;
+}
+.content{
+	display: inline-block;
+	margin:10px;
+}
+.response_to_answer p{
+	font-size: small;
+	margin:10px;
+}
+
+.close_question {
+	/*float: right;*/
+	position:absolute;
+	bottom:0;
+	right:0;
+}
+
+.answer {
+	/*padding-top: 30px;*/
+	/*display: block;*/
+}
+
+.ansewer .content{
+	display: inline-block;
+}
+.answer .information{
+	display: inline-block;
+}
+.answer .information .user_image{
+	padding-bottom: 3px;
+}
+
+.question{
+	position: relative;
+}
+
+.question .questioner_info{
+	display: inline-block;
+}
+
+.question .questioner_info .user_image{
+	padding-bottom: 3px;
+}
+
+.question .content{
+	display: inline-block;
+}
