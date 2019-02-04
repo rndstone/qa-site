@@ -1,49 +1,3 @@
-<style>
-.list-inline li {
-  width: 30%;
-}
-.content{
-	display: inline-block;
-	margin:10px;
-}
-.response_to_answer p{
-	font-size: small;
-	margin:10px;
-}
-
-.close_question {
-	float: right;
-}
-
-.answer {
-	/*padding-top: 30px;*/
-	/*display: block;*/
-}
-
-.ansewer .content{
-	display: inline-block;
-}
-.answer .information{
-	display: inline-block;
-}
-.answer .information .user_image{
-	padding-bottom: 3px;
-}
-
-.question .questioner_info{
-	display: inline-block;
-}
-
-.question .questioner_info .user_image{
-	padding-bottom: 3px;
-}
-
-.question .content{
-	display: inline-block;
-}
-
-
-</style>
 <div class="container">
   <div class="row">
     <div class="col-md-9">
@@ -73,15 +27,17 @@
 					<p><%= @question.content %></p>
 	        <button type="button" class="btn btn-secondary"><a href="#">tag名</a></button>
 	        <button type="button" class="btn btn-secondary"><a href="#">tag名2</a></button>
+	        
         </div>
-      </div>
-      <% if logged_in? %>
+              <% if logged_in? %>
 	      <% if current_user.id == @question.user_id && @question.is_open == 1%>
 					<div class="close_question">
 		       <%= link_to '質問を閉じる', question_path(id: @question.id), method: :put, data: {confirm: '本当に回答の受付を終了しますか？'}, class: "btn btn-primary" %>
 					</div>
 				<% end %>
 			<% end %>
+      </div>
+
 			
       <% if logged_in? %>
       	<% if current_user.id != @question.user_id && @question.is_open == 1 %>
