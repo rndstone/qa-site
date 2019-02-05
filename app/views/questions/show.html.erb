@@ -45,7 +45,7 @@
 		      	<div class="form-group">
 					    <%= form_for(@answer) do |f|%>
 					    		<%= f.text_area :content, :rows => "10", class: 'form-control' %>
-						    	<%= f.hidden_field :question_id, :value => @question.id %>
+					    		<% session[:question_id] = @question.id %>
 						    	<%= f.submit '回答する', class: "btn btn-primary mb-2" %>
 					    	<% end %>
 				  		</div>
