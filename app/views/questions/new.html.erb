@@ -14,5 +14,5 @@
     <%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-check-input' %>
   </div>
   
-  <%= f.submit '投稿する' %>
+  <%= f.submit '投稿する', class: "btn btn-primary" %>
 <% end %>
