@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
   def create
     # binding.pry
     # if current_user.id == @question.user_id
-    binding.pry
+    #binding.pry
     
     params[:answer][:question_id] = session[:question_id]
       @answer = current_user.answers.new(answer_params)
