@@ -8,7 +8,10 @@
         </div>
          <div class="questioner_info">
         	<% user = User.find(@question.user_id) %>
-        	投稿者: <%= user.name %>
+        	<p>投稿者: <%= user.name %></p>
+        	<p>
+        	投稿日時: <%= @question.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分")%>
+        	</p>
         	<br>
         	<div class="user_image">
         	  <% if user.image_name_identifier != "default.jpg" %>
@@ -68,7 +71,9 @@
 		        	<% end %>
 		        <div class="information">
 		        	<% responder = User.find(answer.user_id) %>
-		        	回答者: <%= responder.name %>
+		        	<p>回答者: <%= responder.name %></p>
+		        	<p>回答日時: <%= @question.created_at.in_time_zone('Tokyo').strftime("%Y年%m月%d日 %H時%M分")%>
+							</p>
 		        	<br>
 		        	<div class="user_image">
 		        <% if responder.image_name_identifier != "default.jpg" %>
