@@ -40,7 +40,6 @@ class QuestionsController < ApplicationController
   
   def update
     @question = Question.find(params[:id])
-    # @question.update_attributes 
     @question.is_open = 0
     if @question.save
       flash[:success] = "質問の回答を締め切りました"
@@ -52,7 +51,6 @@ class QuestionsController < ApplicationController
   end
   
   def search
-    binding.pry
     @q = Question.ransack(params[:q])
     @found_questions = @q.result(distinct: true)
   end
@@ -64,6 +62,6 @@ class QuestionsController < ApplicationController
   end
   
   def search_params
-    params.require(:q).permit!
+    params.require(:q).permit(:title_cont)
   end
 end
