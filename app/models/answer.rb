@@ -3,6 +3,7 @@ class Answer < ApplicationRecord
   validate :best_answer_exsists_only_one
   include ActiveModel::Validations
   validates_with ClosedAnswerValidator, on:[:create]
+  validates_with QuestionerCannotAnswerValidator, on:[:create]
   belongs_to :user
   belongs_to :question
   has_many :answer_likes
