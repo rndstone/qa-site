@@ -54,6 +54,7 @@ class QuestionsController < ApplicationController
   def search
     binding.pry
     @q = Question.ransack(params[:q])
+    p params[:q]
     @found_questions = @q.result(distinct: true)
   end
   
@@ -64,6 +65,6 @@ class QuestionsController < ApplicationController
   end
   
   def search_params
-    params.require(:q).permit!
+    params.require(:q).permit(:title_cont)
   end
 end

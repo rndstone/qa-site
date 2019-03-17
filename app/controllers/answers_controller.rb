@@ -2,12 +2,8 @@ class AnswersController < ApplicationController
   before_action :require_user_logged_in
   before_action :questioner_cannot_answer, only:[:create]
   def create
-    # binding.pry
-    # if current_user.id == @question.user_id
-    binding.pry
-    
     params[:answer][:question_id] = session[:question_id]
-      @answer = current_user.answers.new(answer_params)
+    @answer = current_user.answers.new(answer_params)
       if @answer.save
         flash[:success] = '回答を送信しました'
         redirect_to question_path(params[:answer][:question_id])
@@ -15,7 +11,6 @@ class AnswersController < ApplicationController
         flash[:danger] = '回答に失敗しました'
         redirect_to question_path(params[:answer][:question_id])
       end
-    # end
   end
   
   # def put
