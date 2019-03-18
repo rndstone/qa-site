@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :require_user_logged_in
   before_action :questioner_cannot_answer, only:[:create]
+  
   def create
     params[:answer][:question_id] = session[:question_id]
     @answer = current_user.answers.new(answer_params)
