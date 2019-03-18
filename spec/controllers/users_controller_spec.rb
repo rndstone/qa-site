@@ -11,15 +11,15 @@ RSpec.describe UsersController, type: :controller do
     it "responds unsuccessfully if not logged_in" do
       # sign_in @user
       get :show, params: {id: @user.id}
-      p response
+      # p response
       expect(response).to_not be_success
     end
     
     it "redirect to root_url if another user open user page" do
       sign_in @user
       get :show, params: {id: @user.id}
-      # expect(response).to have_http_status "302"
-      expect(response).to be_success
+      expect(response).to have_http_status "302"
+      # expect(response).to be_success
     end
     
     it "returns a 302 response" do
