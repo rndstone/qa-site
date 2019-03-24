@@ -1,3 +1,4 @@
+<% if Question.exists? %>
  <h2>人気の質問</h2>
         <ol>
 							<% model.retrieve_top_question.each do |like| %>
@@ -6,7 +7,7 @@
 								</li>
 								<% end %>
 			  </ol>
-					
+<% end %>
 					<h2>タグから探す</h2>
 					<ul class="list-inline">
 						<li class="list-item list-inline-item">
