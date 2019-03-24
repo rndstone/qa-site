@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190114104644) do
+ActiveRecord::Schema.define(version: 20190324070248) do
 
   create_table "answer_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -37,6 +37,21 @@ ActiveRecord::Schema.define(version: 20190114104644) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "currency_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "funds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.decimal  "amount",        precision: 14, scale: 5, default: "0.0"
+    t.integer  "user_id"
+    t.integer  "currency_type"
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.index ["user_id"], name: "index_funds_on_user_id", using: :btree
   end
 
   create_table "question_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -69,6 +84,25 @@ ActiveRecord::Schema.define(version: 20190114104644) do
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
 
+  create_table "transfer_tos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "transfer_id"
+    t.integer  "to_user"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["transfer_id"], name: "index_transfer_tos_on_transfer_id", using: :btree
+  end
+
+  create_table "transfers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.decimal  "amount",           precision: 14, scale: 5
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "currency_type_id"
+    t.integer  "tradetype"
+    t.index ["currency_type_id"], name: "index_transfers_on_currency_type_id", using: :btree
+    t.index ["user_id"], name: "index_transfers_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "email"
@@ -82,9 +116,13 @@ ActiveRecord::Schema.define(version: 20190114104644) do
   add_foreign_key "answer_likes", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "funds", "users"
   add_foreign_key "question_likes", "questions"
   add_foreign_key "question_likes", "users"
   add_foreign_key "questioner_responses", "answers"
   add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users"
+  add_foreign_key "transfer_tos", "transfers"
+  add_foreign_key "transfers", "currency_types"
+  add_foreign_key "transfers", "users"
 end
