@@ -2,20 +2,28 @@
 
 質問サイトです。
 
-# To build(Ubuntu)
-* rmagick
+# To setup locally(Ubuntu)
+* install rmagick
 ```
-sudo apt-get purge graphicsmagick graphicsmagick-dbg imagemagick-common imagemagick imagemagick-6.q16 libmagickcore-6-headers libmagickwand-dev graphicsmagick-libmagick-dev-compat
-sudo apt-get autoremove
-sudo apt-get install imagemagick libmagickwand-dev
+sudo apt-get install libmagickwand-dev
 ```
 
-* mysql
+* install mysql
 ```
 sudo apt-get install mysql-server
 ```
 
-* install gem
+* install libraries
 ```
 bundle install
+```
+
+* setup db
+```
+rails db:db:create
+```
+
+* run
+```
+rails start
 ```
