@@ -23,8 +23,10 @@
 							</li>
 						<% end %>
     </div>
+	<% if Question.exists? %>
     <div class="col-md-3">
       <%= render 'layouts/sidebar', model:@active_questions[1] %>
 		</div>
+	<% end %>
   </div>
 </div>

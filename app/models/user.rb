@@ -12,6 +12,17 @@ class User < ApplicationRecord
   
   has_many :question_likes
   has_many :answer_likes
+  has_many :funds
   
   mount_uploader :image_name, ImageUploader
+  
+  def apply_login_bornus(amount=30)
+    Fund.transaction do
+      fund = Fund.find_by(user_id: self.id, currency_type: 1)
+      fund.update!(amount: fund.amount + amount)
+      transfer = Transfer.new(amount: amount, currency_type: CurrencyType.find(1), tradetype: 1)
+      transfer.save!
+      transfer.transfer_tos.create(to_user: self.id)
+    end
+  end
 end
